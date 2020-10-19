@@ -13,6 +13,7 @@
         <module>video-service</module>
         <module>video-commons</module>
         <module>video-web</module>
+        <module>video-utils</module>
 
     </modules>
     <packaging>pom</packaging>
