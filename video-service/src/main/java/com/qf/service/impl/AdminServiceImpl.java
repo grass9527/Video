@@ -18,4 +18,9 @@ public class AdminServiceImpl implements AdminService {
     public List<Admin> findAll() {
         return adminMapper.selectByExample(null);
     }
+
+    @Override
+    public Admin findById(Integer id) {
+        return adminMapper.selectByPrimaryKey(id);
+    }
 }
