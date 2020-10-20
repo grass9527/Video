@@ -35,9 +35,9 @@ public class AdminController {
 
     }
 
-    @RequestMapping("test")
+    @RequestMapping("loginView")
     @ResponseBody
-    public ModelAndView test() {
+    public ModelAndView loginView() {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/behind/login.jsp");
@@ -45,4 +45,6 @@ public class AdminController {
         return mav;
 
     }
+
+
 }

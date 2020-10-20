@@ -1,5 +1,6 @@
 package com.qf.dao;
 
+import com.qf.pojo.QueryVo;
 import com.qf.pojo.Video;
 import com.qf.pojo.VideoExample;
 import java.util.List;
@@ -17,6 +18,8 @@ public interface VideoMapper {
     int insertSelective(Video record);
 
     List<Video> selectByExampleWithBLOBs(VideoExample example);
+
+    List<Video> findAllVideo(QueryVo queryVo);
 
     List<Video> selectByExample(VideoExample example);
 

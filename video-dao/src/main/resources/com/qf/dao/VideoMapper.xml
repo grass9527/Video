@@ -320,4 +320,23 @@
       play_num = #{playNum,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findAllVideo" resultMap="BaseResultMap">
+    SELECT book.id,bookname,author,price,book.descr,path,NAME
+    FROM book,book_class
+    WHERE book.class_id = book_class.id
+    <trim>
+      <if test="querybookname!=null and querybookname!=''">
+        and bookname like concat('%',#{querybookname},'%')
+      </if>
+      <if test="queryauthor!=null and queryauthor!=''">
+        and author=#{queryauthor}
+      </if>
+      <if test="querybookclassname!=null and querybookclassname!=''">
+        and class_id=#{querybookclassname}
+      </if>
+    </trim>
+
+
+  </select>
 </mapper>
