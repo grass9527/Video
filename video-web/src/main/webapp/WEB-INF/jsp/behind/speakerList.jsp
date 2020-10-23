@@ -34,8 +34,10 @@
                 'Delete': {
                     'primary': true,
                     'callback': function () {
-                        var param = {"id": id};
-                        $.post("speakerDel", param, function (data) {
+                        var param = {
+                            "id": id
+                        };
+                        $.post("/speaker/deleteById", param, function (data) {
                             if (data == 'success') {
                                 Confirm.show('温馨提示：', '删除成功');
                                 $(Obj).parent().parent().remove();
@@ -46,6 +48,7 @@
                     }
                 }
             });
+            return false;
         }
     </script>
     <style type="text/css">
@@ -119,7 +122,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.rows}" var="speaker" varStatus="status">
+        <c:forEach items="${speakerList}" var="speaker" varStatus="status">
             <tr>
                 <td>${status.index+1}</td>
                 <td>${speaker.speakerName}</td>
@@ -128,7 +131,8 @@
                 <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${speaker.speakerDesc}</td>
                 <td><a href="${pageContext.request.contextPath}/speaker/edit?id=${speaker.id}"><span
                         class="glyphicon glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                <td><a href="#" onclick="return delSpeakerById(this,'${speaker.id}','${speaker.speakerName}')"><span
+                <td><a
+                        onclick="return delSpeakerById(this,'${speaker.id}','${speaker.speakerName}')"><span
                         class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
             </tr>
 
@@ -138,11 +142,11 @@
         </tbody>
     </table>
 </div>
-<div class="container">
-    <div class="navbar-right" style="padding-right: 17px">
-        <p:page url="${pageContext.request.contextPath}/speaker/showSpeakerList"></p:page>
-    </div>
-</div>
+<%--<div class="container">--%>
+<%--    <div class="navbar-right" style="padding-right: 17px">--%>
+<%--        <p:page url="${pageContext.request.contextPath}/speaker/showSpeakerList"></p:page>--%>
+<%--    </div>--%>
+<%--</div>--%>
 </body>
 
 </html>

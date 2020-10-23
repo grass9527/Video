@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CourseMapper {
+
+    Course findVideoById(Integer id);
+
     int countByExample(CourseExample example);
 
     int deleteByExample(CourseExample example);

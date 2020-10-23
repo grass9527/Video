@@ -46,5 +46,15 @@ public class AdminController {
 
     }
 
+    @RequestMapping("exit")
+    @ResponseBody
+    public ModelAndView exit() {
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/behind/login.jsp");
+
+        return mav;
+
+    }
 
 }

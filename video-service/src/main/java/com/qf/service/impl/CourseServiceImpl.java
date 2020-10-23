@@ -3,6 +3,7 @@ package com.qf.service.impl;
 import com.qf.dao.CourseMapper;
 import com.qf.dao.VideoMapper;
 import com.qf.pojo.Course;
+import com.qf.pojo.CourseExample;
 import com.qf.pojo.Video;
 import com.qf.service.CourseService;
 import com.qf.service.VideoService;
@@ -25,5 +26,21 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course findById(Integer id) {
         return courseMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Course> findSubjectId(Integer id) {
+
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria criteria = example.createCriteria();
+        criteria.andSubjectIdEqualTo(id);
+        List<Course> courses = courseMapper.selectByExample(example);
+        return courses;
+    }
+
+    @Override
+    public Course findVideoById(Integer id) {
+
+        return courseMapper.findVideoById(id);
     }
 }

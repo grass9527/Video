@@ -6,9 +6,10 @@
     <result column="speaker_name" property="speakerName" jdbcType="VARCHAR" />
     <result column="speaker_job" property="speakerJob" jdbcType="VARCHAR" />
     <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR" />
+    <result column="speaker_desc" property="speakerDesc" jdbcType="LONGVARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.qf.pojo.Speaker" extends="BaseResultMap" >
-    <result column="speaker_desc" property="speakerDesc" jdbcType="LONGVARCHAR" />
+<!--    <result column="speaker_desc" property="speakerDesc" jdbcType="LONGVARCHAR" />-->
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -248,4 +249,8 @@
       head_img_url = #{headImgUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findAll" resultMap="BaseResultMap">
+    select *
+    from speaker
+  </select>
 </mapper>

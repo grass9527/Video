@@ -133,11 +133,11 @@
     <div class="container">
 
         <%-- <c:if test="empty ${video.id}"> --%>
-        <c:if test="${empty speaker.id}">
+        <c:if test="${speaker.id==count}">
             <h2>添加主讲人信息</h2>
         </c:if>
 
-        <c:if test="${not empty speaker.id}">
+        <c:if test="${speaker.id!=count}">
             <h2>修改主讲人信息</h2>
         </c:if>
 
@@ -150,9 +150,8 @@
     <form class="form-horizontal" action="${pageContext.request.contextPath}/speaker/saveOrUpdate" method="post">
 
 
-        <c:if test="${not empty speaker.id}">
             <input type="hidden" name="id" value="${speaker.id}">
-        </c:if>
+
 
         <div class="form-group">
             <label class="col-sm-2 control-label">名称</label>

@@ -13,4 +13,14 @@ public interface VideoService {
 
 
     List<Video> findAllVideo(QueryVo queryVo);
+
+    int deleteById(Integer id);
+
+    int update(Video video);
+
+    int addVideo(Video video);
+
+    int getCount();
+
+    Video find(Integer id);
 }

@@ -115,8 +115,8 @@ $("#regEmail").blur(function () {
     // js 判断不相等  不能使用   !""==xxxx
     if (null != emailVal && "" != emailVal) {
         var params = {"email": emailVal};
-        // alert(params);
-        $.post('/' + getRootPath() + "/user/validateEmail", params, function (data) {
+         alert(params);
+        $.post("/user/validateEmail", params, function (data) {
             if (data == "success") {
                 regIsCommitEmail = true;
                 $("#emailMsg").text("该邮箱可用").css("color", "green");
@@ -149,7 +149,7 @@ $("#regPswAgain").blur(function () {
 
 $("#loginout").click(function () {
 
-    $.get('/' + getRootPath() + "/user/loginOut", null, function () {
+    $.get("/user/loginOut", null, function () {
         $("#regBlock").css("display", "block");
         $("#userBlock").css("display", "none");
     });
@@ -171,7 +171,7 @@ function commitRegForm() {
 
         $.ajax({
 
-            url: '/' + getRootPath() + "/user/insertUser",
+            url:"http://localhost:8080/user/insertUser",
             data: $("#regForm").serialize(),
             type: "POST",
             success: function (data) {
@@ -203,15 +203,15 @@ function commitRegForm() {
 verifyCode = new GVerify("v_container");
 
 function commitLogin() {
-    // alert("login");
+     alert("login");
     var email = $("#loginEmail").val();
     var password = $("#loginPassword").val();
     if (null != email && email != "" && null != password && password != "") {
         var params = $("#loginForm").serialize();
-        // alert(params);
+         alert(params);
         // post要小写
-        $.post('/' + getRootPath() + "/user/loginUser", params, function (data) {
-            // alert(data);
+        $.post("/user/loginUser", params, function (data) {
+             alert(data);
             if (data == 'success') {
 
                 //登录框消失

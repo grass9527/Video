@@ -31,6 +31,7 @@ com\qf\pojo\AdminExample$Criterion.class
 com\qf\pojo\SubjectExample.class
 com\qf\pojo\Admin.class
 com\qf\pojo\CourseExample$Criterion.class
+com\qf\pojo\QueryVo.class
 com\qf\dao\AdminMapper.class
 com\qf\pojo\AdminExample.class
 com\qf\pojo\UserExample$GeneratedCriteria.class

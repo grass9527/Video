@@ -50,7 +50,7 @@
         <div id="userBlock" style="display:none;float:right">
 
             <a href="javascript:;" id="loginout2">退出</a>
-            <a href="${pageContext.request.contextPath}/user/showMyProfile" id="account">${sessionScope.userAccount}</a>
+            <a href="/user/showMyProfile" id="account">${sessionScope.userAccount}</a>
         </div>
 
         <a onclick="JavaScript:addFavorite2()"><img src="${pageContext.request.contextPath}/img/sc.png"

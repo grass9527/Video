@@ -10,5 +10,9 @@ public interface CourseService {
 
     Course findById(Integer id);
 
+    List<Course> findSubjectId(Integer id);
+
+    Course findVideoById(Integer id);
+
 
 }

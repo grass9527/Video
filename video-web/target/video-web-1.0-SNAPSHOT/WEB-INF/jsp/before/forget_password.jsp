@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="form_body">
-                <input type="email" placeholder="请输入登录邮箱" name="email" value="${email}">
+                <input type="email" placeholder="请输入登录邮箱" name="email" <%--value="${email}"--%>>
                 <input type="text" placeholder="请输入验证码" name="code"><input type="button" id="yzmBtn" value="获取验证码"/>
                 <input type="submit" value="提交">
             </div>

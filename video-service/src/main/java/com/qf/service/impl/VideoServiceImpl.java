@@ -30,6 +30,31 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public List<Video> findAllVideo(QueryVo queryVo) {
-        return null;
+        return videoMapper.findAllVideo(queryVo);
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        return videoMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int update(Video video) {
+        return videoMapper.updateByPrimaryKeySelective(video);
+    }
+
+    @Override
+    public int addVideo(Video video) {
+        return videoMapper.insert(video);
+    }
+
+    @Override
+    public int getCount() {
+        return videoMapper.countByExample(null);
+    }
+
+    @Override
+    public Video find(Integer id) {
+        return videoMapper.find(id);
     }
 }

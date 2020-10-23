@@ -48,7 +48,7 @@
     </style>
     <script type="text/javascript">
         function showAddPage() {
-            location.href = "${pageContext.request.contextPath}/video/addVideo";
+            location.href = "/video/addVideo";
         }
 
         $(function () {
@@ -84,7 +84,7 @@
                         var params = {
                             "id": id
                         };
-                        $.post("${pageContext.request.contextPath}/video/videoDel", params, function (data) {
+                        $.post("/video/deleteById", params, function (data) {
                             if (data == 'success') {
                                 Confirm.show('处理结果', '恭喜您删除成功');
                                 //请用js删除掉那条记录
@@ -165,13 +165,13 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
 
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/video/list">视频管理系统</a>
+            <a class="navbar-brand" href="/video/list">视频管理系统</a>
         </div>
 
         <div class="collapse navbar-collapse"
              id="bs-example-navbar-collapse-9">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="${pageContext.request.contextPath}/video/list">视频管理</a></li>
+                <li class="active"><a href="/video/list">视频管理</a></li>
                 <li><a href="${pageContext.request.contextPath}/speaker/showSpeakerList">主讲人管理</a></li>
                 <li><a href="${pageContext.request.contextPath}/showCourseList">课程管理</a></li>
 
@@ -214,7 +214,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-6">
             <!-- 查询相关组件 -->
-            <form class="navbar-form navbar-right" action="${pageContext.request.contextPath}/video/list" method="post">
+            <form id="queryForm" class="navbar-form navbar-right" action="/video/list" method="post">
                 <input type="text" name="title" class="form-control" placeholder="标题" value="${queryVo.title}">
                 <div class="btn-group">
                     <button type="button" id="speakerName"
@@ -266,6 +266,7 @@
                     </ul>
                     <input type="hidden" name="courseId" id="courseId" value="${queryVo.courseId}"/>
                 </div>
+                <input type="hidden" name="pageNum" id="pageNum">
                 <button type="submit" class="btn btn-info dropdown-toggle">查询</button>
             </form>
 
@@ -280,7 +281,7 @@
         相对路径就是将最后一个/后面的东西替换掉
         http://localhost/video/video/delBatchVideos
     -->
-    <form id="form2" action="${pageContext.request.contextPath}/video/delBatchVideos" method="post">
+    <form id="form2" action="/video/delAll" method="post">
         <table class="table table-bordered table-hover"
                style="text-align: center;table-layout:fixed">
             <thead>
@@ -298,7 +299,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${page.rows}" var="video" varStatus="status">
+            <c:forEach items="${page.list}" var="video" varStatus="status">
                 <tr>
                     <td><input type="checkbox" name="ids" value="${video.id}"
                                onclick="selectOne(this)"/></td>
@@ -308,7 +309,7 @@
                     <td>${video.speaker.speakerName}</td>
                     <td>${video.time}</td>
                     <td>${video.playNum}</td>
-                    <td><a href="${pageContext.request.contextPath}/video/edit?id=${video.id}"><span
+                    <td><a href="/video/update?id=${video.id}"><span
                             class="glyphicon glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                     <!-- js中如果使用el表达式，请用单引号包括，避免造成一些语法问题 -->
                     <td><a
@@ -327,10 +328,41 @@
 </div>
 <div class="container">
     <div class="navbar-right" style="padding-right: 17px">
-        <p:page url="${pageContext.request.contextPath}/video/list"></p:page>
+<%--        <p:page url="${pageContext.request.contextPath}/video/list"></p:page>--%>
+    <tr>
+        <a href="javascript:void(0)" onclick="queryBook(1)">首页</a>
+        <a href="javascript:void(0)" onclick="queryBook(${page.pageNum-1})">上一页</a>
+        <a href="javascript:void(0)" onclick="queryBook(${page.pageNum+1})">下一页</a>
+        <a href="javascript:void(0)" onclick="queryBook(${page.pages})">尾页</a>
+    </tr>
     </div>
 </div>
 
 
 </body>
+<script type="application/javascript" src="../../../js/jquery-1.8.3.min.js"></script>
+<script>
+
+    function addBook() {
+        location.href="/book/toAddBook"
+    }
+
+    function queryBook(pageNum) {
+        $("#pageNum").val(pageNum);
+        $("#queryForm").submit();
+    }
+
+    function checkAllId(allNode) {
+        //allNode就是document.getElementById("all");
+        var itemNodes = document.getElementsByClassName("item");
+        for(var i=0;i<itemNodes.length;i++){
+            itemNodes[i].checked = allNode.checked;
+        }
+    }
+
+
+    function delAll() {
+        $("#form2").submit();
+    }
+</script>
 </html>

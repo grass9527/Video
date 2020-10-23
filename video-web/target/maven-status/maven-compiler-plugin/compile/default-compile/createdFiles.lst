@@ -1,0 +1,6 @@
+com\qf\controller\SubjectController.class
+com\qf\controller\CourseController.class
+com\qf\controller\VideoController.class
+com\qf\controller\UserController.class
+com\qf\controller\SpeakerController.class
+com\qf\controller\AdminController.class

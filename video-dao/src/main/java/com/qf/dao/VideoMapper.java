@@ -7,6 +7,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface VideoMapper {
+
+    Video find(Integer id);
+
     int countByExample(VideoExample example);
 
     int deleteByExample(VideoExample example);

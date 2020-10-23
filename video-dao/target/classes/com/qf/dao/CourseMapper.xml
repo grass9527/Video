@@ -104,7 +104,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -187,9 +187,9 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update course
     set id = #{record.id,jdbcType=INTEGER},
-      course_title = #{record.courseTitle,jdbcType=VARCHAR},
-      subject_id = #{record.subjectId,jdbcType=INTEGER},
-      course_desc = #{record.courseDesc,jdbcType=LONGVARCHAR}
+    course_title = #{record.courseTitle,jdbcType=VARCHAR},
+    subject_id = #{record.subjectId,jdbcType=INTEGER},
+    course_desc = #{record.courseDesc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,8 +197,8 @@
   <update id="updateByExample" parameterType="map" >
     update course
     set id = #{record.id,jdbcType=INTEGER},
-      course_title = #{record.courseTitle,jdbcType=VARCHAR},
-      subject_id = #{record.subjectId,jdbcType=INTEGER}
+    course_title = #{record.courseTitle,jdbcType=VARCHAR},
+    subject_id = #{record.subjectId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -231,4 +231,58 @@
       subject_id = #{subjectId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- private Integer id;
+
+   private String courseTitle;
+
+   private Integer subjectId;
+
+   private String courseDesc;
+
+   private List<Video> videoList;
+ -->
+  <resultMap id="deptMap" type="com.qf.pojo.Course">
+    <id column="id" property="id"></id>
+    <result column="course_title" property="courseTitle"></result>
+    <result column="course_desc" property="courseDesc"></result>
+    <result column="subject_id" property="subjectId"></result>
+    <!-- private Integer id;
+
+     private String title;
+
+     private Integer time;
+
+     private Integer speakerId;
+
+     private Integer courseId;
+
+     private String videoUrl;
+
+     private String imageUrl;
+
+     private Integer playNum;
+
+     private String detail;-->
+
+    <collection property="videoList" ofType="com.qf.pojo.Video">
+      <id column="vid" property="id"></id>
+      <result column="title" property="title"></result>
+      <result column="detail" property="detail"></result>
+      <result column="time" property="time"></result>
+      <result column="speaker_id" property="speakerId"></result>
+      <result column="course_id" property="courseId"></result>
+      <result column="video_url" property="videoUrl"></result>
+      <result column="image_url" property="imageUrl"></result>
+      <result column="play_num" property="playNum"></result>
+    </collection>
+  </resultMap>
+
+  <select id="findVideoById" resultMap="deptMap">
+        select c.id,c.course_title,c.course_desc,c.subject_id,v.id as vid,v.title,
+        v.detail,v.time,v.speaker_id,v.course_id,v.video_url,v.image_url,v.play_num
+        from course c join video v
+        on c.id = v.course_id
+        where c.id=#{id}
+    </select>
+
 </mapper>
